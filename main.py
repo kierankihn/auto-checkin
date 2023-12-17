@@ -13,9 +13,12 @@ def checkin():
 
     response=requests.get('https://www.luogu.com.cn/index/ajax_punch', headers=headers)
 
-    res=json.loads(response.content.decode("unicode_escape"))
+    res=json.loads(response.content)
 
-    print(res.get("message"))
+    if (response.status_code == 200):
+        print(res.get("more"))
+    if (response.status_code == 201):
+        print(res.get("message"))
 
 
 load_dotenv()
