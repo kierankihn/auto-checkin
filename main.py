@@ -34,9 +34,7 @@ def checkin():
 
 getConfig()
 
-checkin()
-
-# schedule.every().days.at('10:00', 'Asia/Shanghai').do(checkin)
+schedule.every().days.at('10:00', 'Asia/Shanghai').do(checkin)
 
 while True:
     schedule.run_pending()
