@@ -4,6 +4,8 @@ WORKDIR ./app
 
 ADD . .
 
-RUN pip install -r requirements.txt
+RUN apk add --update py3-pip
 
-CMD ["python", "./src/main.py"]
+RUN pip3 install -r requirements.txt --break-system-packages
+
+CMD ["python", "./main.py"]
