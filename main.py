@@ -5,12 +5,36 @@ import requests
 
 
 def getConfig():
+    """
+    Reads the contents of the 'config.json' file and loads it into the global variable 'config'.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
     with open('config.json', 'r') as configFile:
         global config
         config = json.load(configFile)
 
 
+
 def checkin():
+    """
+    This function is responsible for performing the check-in process. 
+    It sends a GET request to the Luogu website with the necessary headers and cookies to authenticate the user. 
+    After receiving the response, it checks the status code and prints the appropriate message based on the result. 
+    If the check-in is successful, it prints 'Check-in successful!'. 
+    If the user has already checked in today, it prints 'Already checked in today.'. 
+    If there is an error during the check-in process, it prints the error message returned by the server.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
     for luoguCookie in config.get('token'):
 
         headers={'Cookie': '__client_id=' + luoguCookie.get('__client_id') + '; _uid=' + str(luoguCookie.get('_uid')) + ';',
@@ -20,16 +44,16 @@ def checkin():
 
         res=json.loads(response.content)
 
-        print('正在打卡：uid = ' + str(luoguCookie.get('_uid')))
+        print('Checking in: uid =' + str(luoguCookie.get('_uid')))
 
         if (response.status_code != 200):
-            print('打卡失败，错误信息：')
+            print('Check-in failed, error message:')
             print(response)
         else:
             if (res.get('code') == 200):
-                print('打卡成功！')
+                print('Check-in successful!')
             if (res.get('code') == 201):
-                print('今天已经打过卡了')
+                print('Already checked in today.')
 
 
 getConfig()
