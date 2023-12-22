@@ -1,0 +1,5 @@
+.vscode
+.gitignore
+config-example.json
+config.json
+README.md
