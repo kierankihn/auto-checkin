@@ -1,7 +1,18 @@
 import time
 import json
+import logging
 import schedule
 import requests
+
+
+handler = logging.StreamHandler()
+handler.setFormatter(logging.Formatter("%(asctime)s %(filename)s %(levelname)s - %(message)s"))
+infoLogger = logging.getLogger('checkin_info')
+infoLogger.setLevel(logging.INFO)
+infoLogger.addHandler(handler)
+errorLogger = logging.getLogger('checkin_error')
+errorLogger.setLevel(logging.ERROR)
+errorLogger.addHandler(handler)
 
 
 def getConfig():
@@ -44,16 +55,15 @@ def checkin():
 
         res=json.loads(response.content)
 
-        print('Checking in: uid =' + str(luoguCookie.get('_uid')))
+        infoLogger.info('Checking in: uid = ' + str(luoguCookie.get('_uid')))
 
         if (response.status_code != 200):
-            print('Check-in failed, error message:')
-            print(response)
+            errorLogger.error('Check in failed, error message:\n' + response)
         else:
             if (res.get('code') == 200):
-                print('Check-in successful!')
+                infoLogger.info('Check in successful!')
             if (res.get('code') == 201):
-                print('Already checked in today.')
+                infoLogger.info('Already checked in today.')
 
 
 getConfig()
