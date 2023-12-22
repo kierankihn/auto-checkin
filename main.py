@@ -48,12 +48,12 @@ def checkin():
     """
     for luoguCookie in config.get('token'):
 
-        headers={'Cookie': '__client_id=' + luoguCookie.get('__client_id') + '; _uid=' + str(luoguCookie.get('_uid')) + ';',
-             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+        headers = {'Cookie': '__client_id=' + luoguCookie.get('__client_id') + '; _uid=' + str(luoguCookie.get('_uid')) + ';',
+                   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
 
-        response=requests.get('https://www.luogu.com.cn/index/ajax_punch', headers=headers)
+        response = requests.get('https://www.luogu.com.cn/index/ajax_punch', headers=headers)
 
-        res=json.loads(response.content)
+        res = json.loads(response.content)
 
         infoLogger.info('Checking in: uid = ' + str(luoguCookie.get('_uid')))
 
@@ -61,7 +61,7 @@ def checkin():
             errorLogger.error('Check in failed, error message:\n' + response)
         else:
             if (res.get('code') == 200):
-                infoLogger.info('Check in successful!')
+                infoLogger.info('Checked in successfully!')
             if (res.get('code') == 201):
                 infoLogger.info('Already checked in today.')
 
