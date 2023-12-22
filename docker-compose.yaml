@@ -4,3 +4,5 @@ services:
     image: docker.io/kierankihn/auto-checkin:1.0.0
     volumes:
       - ./config.json:/app/config.json
+    environment:
+      - TZ=Asia/Shanghai
