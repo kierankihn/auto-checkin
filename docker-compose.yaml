@@ -1,7 +1,7 @@
 version: '3'
 services:
   auto-checkin:
-    image: gchr.io/kierankihn/auto-checkin:latest
+    image: ghcr.io/kierankihn/auto-checkin:latest
     volumes:
       - ./config.json:/app/config.json
     environment:
