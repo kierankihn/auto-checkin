@@ -1,3 +1,6 @@
-.env
-.vscode
-config.json
+/.env
+/.vscode
+/config.json
+/dist
+/build
+*.spec
