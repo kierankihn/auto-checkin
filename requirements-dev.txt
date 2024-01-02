@@ -1,0 +1,4 @@
+Requests
+schedule
+pytz
+pyinstaller

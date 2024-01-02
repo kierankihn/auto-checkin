@@ -1,13 +1,23 @@
-FROM alpine:latest
+FROM alpine:latest as builder
 
 WORKDIR ./app
 
 ADD . .
 
-RUN apk add --update py3-pip
+RUN apk add --update --no-cache tzdata
 
-RUN pip3 install -r requirements.txt --break-system-packages
+RUN apk add --update --no-cache py3-pip
 
-RUN apk add --no-cache tzdata
+RUN apk add --update --no-cache binutils
 
-CMD ["python3", "-u", "./main.py"]
+RUN pip3 install -r requirements-dev.txt --break-system-packages
+
+RUN pyinstaller -F ./main.py
+
+FROM alpine:latest as runner
+
+WORKDIR ./app
+
+COPY --from=builder /app/dist/main /app
+
+CMD ["./main"]
