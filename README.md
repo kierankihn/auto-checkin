@@ -12,9 +12,9 @@
 
 你可以在 `Chrome` 中按下 F12 打开 `DevTools`，在 `Application（应用）> Cookie > https://luogu.com.cn` 中找到你的 `__client_id` 与 `_uid`
 
-在使用本脚本之前请确保你已经安装了 `python3`，并且有一个文本编辑器，例如 `Visual Studio Code`，`notepad++`，或者记事本
+在使用本脚本之前请确保你有一个文本编辑器，例如 `Visual Studio Code`，`notepad++`，或者记事本
 
-本脚本的配置文件为 `json` 格式，格式如同 `config-example.json`，例如：
+本脚本的配置文件为 `json` 格式，格式如同 `config-example.json`：
 
 ```js
 {
@@ -75,6 +75,36 @@ $ docker-compose logs
 7. 结束容器
 ```sh
 $ docker-compose down
+```
+
+## 构建
+
+### 构建 Linux / Windows 可执行程序
+
+1. 安装 Python
+2. 克隆仓库
+```sh
+$ git clone https://github.com/kierankihn/auto-checkin.git
+```
+3. 安装依赖
+```sh
+$ pip install -r requirements-dev.txt
+```
+4. 打包程序
+```sh
+$ pyinstaller -F main.py
+```
+
+### 构建 Docker 镜像
+
+1. 安装 Docker 和 Docker Compose
+2. 克隆仓库
+```sh
+$ git clone https://github.com/kierankihn/auto-checkin.git
+```
+3. 打包镜像
+```sh
+$ docker build -t kierankihn/auto-checkin:latest .
 ```
 
 ## 开发
