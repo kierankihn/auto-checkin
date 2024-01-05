@@ -115,6 +115,7 @@ $ docker build -t kierankihn/auto-checkin:latest .
 
 ## To do list
 
+- [x] 使用 Github Action 自动推送 Docker 镜像
 - [ ] 允许用户在 config.json 中自定义每日签到时间（使用时间字面值 / cron 表达式）
 - [ ] 增加打卡后向 Telegram bot / Server 酱 / PushDeer 推送打卡日志（打卡成功 / 失败，每日运势等）的功能
 - [ ] 增加使用密码登录功能
